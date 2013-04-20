@@ -1,0 +1,19 @@
+# shortcut to this dotfiles path is $BASH
+export BASH=$HOME/.dotfiles
+
+# all of our zsh files
+config_files=($BASH/**/*.bash)
+
+# load the path files
+for file in ${config_files:#*/path.bash}
+do
+  source $file
+done
+
+# load everything but the path and completion files
+for file in ${${config_files:#*/path.bash}:#*/completion.bash}
+do
+  source $file
+done
+
+unset config_files
